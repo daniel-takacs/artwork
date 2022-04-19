@@ -4,16 +4,24 @@ import Header from './containers/Header'
 import ArtworkList from './containers/ArtworkList'
 import ArtworkDetails from './containers/ArtworkDetails'
 import Favourites from './containers/Favourites'
+import React, { useState } from 'react'
 
 function App() {
+
+  const [favourites, setFavourites] = useState([])
+  const [input, setInput] = useState("")
+  const [query, setQuery] = useState([])
+
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header query={query} setQuery={setQuery}input={input}setInput={setInput}/>
         <Routes>
-          <Route path="/" element={<ArtworkList/>} />
+          <Route path="/" element={<ArtworkList favourites={favourites} 
+                  setFavourites={setFavourites} query={query}setQuery={setQuery}
+                  input={input}setInput={setInput}/> } />
           <Route path="/item/:itemId" element={<ArtworkDetails/>} />
-          <Route path="/favourites" element={<Favourites/>} />
+          <Route path="/favourites" element={<Favourites favourites={favourites}/>} />
           <Route>404 not found</Route>
         </Routes>
       </Router>

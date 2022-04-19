@@ -6,7 +6,7 @@ import { selectedItem, removeSelectedItem } from "../redux/actions/itemActions";
 
 function ArtworkDetails() {
   const item = useSelector((state) => state.item);
-  const { artist_title, publication_history, id } = item;
+  const { artist_title, title, provenance_text, id, image_id } = item;
   const { itemId } = useParams();
   const dispatch = useDispatch();
   console.log(itemId);
@@ -32,8 +32,15 @@ function ArtworkDetails() {
         <div>...Loading</div>
       ) : (
         <>
-        <div>{id}</div>
-        <div>{publication_history}</div>
+          <div class="card mb-3 ">
+            <div class="card-body">
+              <h5 class="card-title">{title}</h5>
+              <p class="card-text">{provenance_text}</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <img src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`} class="card-img" alt="..." />
+            </div>
+          </div>
+
         </>
       )}
     </div>

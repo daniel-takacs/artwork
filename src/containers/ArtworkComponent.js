@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setFavourites } from "../redux/actions/itemActions";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-function ArtworkComponent() {
+function ArtworkComponent({ favourites, setFavourites, query, setQuery }) {
+
+  const [active, setActive] = useState(false)
   const items = useSelector((state) => state.allItems.items);
-  const favorites = useSelector((state) => state.allFavourites.favorites)
-  const dispatch = useDispatch();
 
   const renderList = items.map((item) => {
-    const { id, title, price, image_id } = item;
-
-    const addToFavorite = (e) => {
-      e.preventDefault();
-     console.log(id)
-     dispatch(setFavourites(id))
+    const { id, title, image_id, alt_text } = item;
+ 
+  /*   const addToFavourite = (e) => {
+      e.preventDefault()
+      setFavourites(...prevFavourites => [...prevFavourites, id])
+      console.log(id);
+    }; */
+    const addToFavourite = (e,id) => {
+      e.preventDefault()
+      if (!favourites.includes(id)) setFavourites(favourites.concat(id));
+      console.log(id);
+      setActive(!active)
     };
-    console.log('fav',favorites)
    
     return (
       <div key={id} className="col-sm-6 col-md4 v my-2">
@@ -26,12 +32,13 @@ function ArtworkComponent() {
               <img
                 src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`}
                 class="card-img-top"
-                alt="Girl in a jacket"
-                width="500"
-                height="600"
+                alt=""
+              
               />
               <h5 className="card-title">{title}</h5>
-              <button onClick={addToFavorite}>favorite</button>
+              <FavoriteBorderIcon onClick={(e)=>addToFavourite(e,id)} style={{fill: "red"}}/>
+      {/*         {active ? <FavoriteIcon/> : 
+              <FavoriteBorderIcon onClick={(e)=>addToFavourite(e,id)} style={{fill: "red"}}/>} */}
             </div>
           </div>
         </Link>

@@ -5,11 +5,11 @@ import { setItems } from "../redux/actions/itemActions";
 import ArtworkComponent from "./ArtworkComponent";
 import ReactPaginate from "react-paginate";
 
-function ArtworkList() {
+function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInput }) {
   const items = useSelector((state) => state.allItems.items);
   const { total_pages } = items;
   const dispatch = useDispatch();
-  const limit = 12;
+  const [limit, setLimit] = useState(12);
 
   const [pageCount, setPageCount] = useState(0);
 
@@ -24,11 +24,12 @@ function ArtworkList() {
     dispatch(setItems(response.data.data));
   };
 
+  
+
   useEffect(() => {
-    fetchItems();
+      fetchItems();
   }, [limit]);
 
-  console.log("product", items);
 
   const getItems = async (currentPage) => {
     const res = await fetch(
@@ -45,27 +46,41 @@ function ArtworkList() {
     window.scrollTo(0, 0);
   };
 
-  return (
-    <div className="container">
-      <div className="row m-2">
-        <ArtworkComponent />
-      </div>
 
-      <ReactPaginate
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination justify-content-center"}
-        pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previousPageClassName={"page-item"}
-        previousLinkClassName={"page-link"}
-        nextPageClassName={"page-item"}
-        nextLinkClassName={"page-link"}
-        breakClassName={"page-item"}
-        breakLinkClassName={"page-link"}
-      />
-    </div>
-  );
+  if (query.length > 0){
+
+    const fetchItemsBySearch = async () => {
+      const response = await axios
+        .get(`https://api.artic.edu/api/v1/artworks/search?q=${query}`)
+        .catch((err) => {
+          console.log(err);
+        });
+      dispatch(setItems(response.data.data));
+    };
+  }
+
+    return (
+      <div className="container">
+        <div className="row m-2">
+          <ArtworkComponent favourites={favourites} setFavourites={setFavourites}
+          query={query} setQuery={setQuery}/>
+        </div>
+  
+        <ReactPaginate
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination justify-content-center"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousPageClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextPageClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          breakClassName={"page-item"}
+          breakLinkClassName={"page-link"}
+        />
+      </div>
+    );
 }
 
 export default ArtworkList;
