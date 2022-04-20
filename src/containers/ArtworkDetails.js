@@ -6,7 +6,7 @@ import { selectedItem, removeSelectedItem } from "../redux/actions/itemActions";
 
 function ArtworkDetails() {
   const item = useSelector((state) => state.item);
-  const { artist_title, title, provenance_text, id, image_id } = item;
+  const { artist_display, title, provenance_text, id, image_id, date_display, thumbnail } = item;
   const { itemId } = useParams();
   const dispatch = useDispatch();
   console.log(itemId);
@@ -32,15 +32,24 @@ function ArtworkDetails() {
         <div>...Loading</div>
       ) : (
         <>
-          <div class="card mb-3 ">
+          <div class="card mb-3 justify-content-center align-items-center">
             <div class="card-body">
-              <h5 class="card-title">{title}</h5>
-              <p class="card-text">{provenance_text}</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            <img src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`} class="card-img" alt="..." />
+              <div class="text-center pic">
+                <img
+                  src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`}
+                  class="img-fluid"
+                  alt="Responsive image"
+                />
+              </div>
             </div>
           </div>
-
+          <div className="details-content">
+              <h5 class="card-title">{title}</h5>
+              
+              <p class="card-text">{date_display}</p>
+              <p class="card-text">{artist_display}</p>
+              <p class="card-text">{thumbnail.alt_text}</p>
+          </div>
         </>
       )}
     </div>

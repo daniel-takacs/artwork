@@ -9,7 +9,7 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
   const items = useSelector((state) => state.allItems.items);
   const { total_pages } = items;
   const dispatch = useDispatch();
-  const [limit, setLimit] = useState(12);
+  const [limit, setLimit] = useState(25);
 
   const [pageCount, setPageCount] = useState(0);
 
@@ -60,11 +60,13 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
   }
 
     return (
-      <div className="container">
-        <div className="row m-2">
+      <>
+      <main>
+     <section className="cards">
           <ArtworkComponent favourites={favourites} setFavourites={setFavourites}
           query={query} setQuery={setQuery}/>
-        </div>
+        </section>
+        </main>
   
         <ReactPaginate
           pageCount={pageCount}
@@ -79,7 +81,7 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
           breakClassName={"page-item"}
           breakLinkClassName={"page-link"}
         />
-      </div>
+        </>
     );
 }
 

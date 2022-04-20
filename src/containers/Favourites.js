@@ -38,28 +38,26 @@ function Favourites({ favourites }) {
   }, []); */
 console.log('az oldaon', fetchFavourites)
   return (
-    <>
+    <div >
+      <div className='container'>
   <div>{fetchFavourites.map((item) => (
-    <div className='container'>
       <div className='row m-2'>
         <div className="col-sm-6 col-md4 v my-2">
       <div className="card shadow-sm w-100" style={{ minHeight: 225 }}>
       <div className="card-body">
         <img
           src={`https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`}
-          class="card-img-top"
-          alt="Girl in a jacket"
-          width="500"
-          height="600"
+          class="card-img-top img-fluid"
+          alt="Responsive image"
         />
         <h5 className="card-title">{item.title}</h5>
       </div>
     </div>
     </div>
     </div>
-    </div>
   ))}</div>
-    </>
+  </div>
+    </div>
   )
 }
 

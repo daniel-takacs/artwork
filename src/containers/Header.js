@@ -5,7 +5,7 @@ import SearchForm from './SearchForm'
 const Header = ({ query, setQuery, input, setInput }) => {
   
   return (
-    <div>
+    <div className="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -26,7 +26,7 @@ const Header = ({ query, setQuery, input, setInput }) => {
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                   <Link to="/">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a class="nav-link" aria-current="page" href="#">
                   Home
                 </a>
                 </Link>
