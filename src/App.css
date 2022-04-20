@@ -1,9 +1,9 @@
 .App {
-    max-width: 1400px;
+    max-width: 1700px;
     margin: 0 auto;
 }
 .header {
-    padding:0 37px;
+    margin: 0 auto;
     margin-bottom: 15px;
 }
 .page-link {
@@ -12,49 +12,15 @@
 a {
     text-decoration: none;
 }
-.gallery {
-    column-count: 4;
-    column-width: 25%;
-    padding: 0 12px;
-}
-.gallery .pics {
-    transition: all 350ms ease;
-    cursor: pointer;
-    margin: 25px;
-}
 
 .pics {
 	opacity: 1;
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
-.pics > img{
-  /*   max-width:100%;
-    height: auto;
-    vertical-align: middle;
-    display: inline-block; */
-}
+
 .pics:hover {
 	opacity: .7;
-}
-.pics {
-    position: relative;
-}
-.icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-@media (max-width: 991px){
-    .gallery {
-        column-count: 2;
-    }
-}
-@media (max-width: 480px){
-    .gallery {
-        column-count: 1;
-        column-width: 100%;
-    }
 }
 
 
@@ -76,90 +42,4 @@ a {
     justify-content:center;
     align-items:center;
     flex-direction: column;
-}
-
-
-
-/* .image-gallery {
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 50px 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: 250px;
-    grid-auto-flow: dense;
-    grid-gap: 20px;
-}
-.image-gallery .image-box {
-    position: relative;
-    background-color: #d7d7d8;
-    overflow: hidden;
-
-}
-.image-gallery .image-box:nth-child(7n+1){
-    grid-column: span 2;
-
-} */
-
-main {
-    display: grid;
-    grid-template-columns: 1fr repeat(12, minmax(auto, 60px)) 1fr;
-    grid-gap: 40px;
-    padding: 60px 0;
-}
-.text--medium {
-    
-}
-.cards {
-    grid-column: 2 / span 12;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(auto, 60px));
-    grid-gap: 40px
-}
-.card__container {
-    grid-column-end: span 4;
-    display:flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-.card__image-container{
-    width:100%;
-    padding-top: 56.25%;
-    overflow: hidden;
-    position: relative;
-}
-.card__image-container img {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-}
-.card__container:hover {
-    opacity: .7;
-}
-.card__content {
-    padding: 20px 20px 0 0
-}
-.card__title {
-    margin-bottom: 20px;
-}
-.card__info {
-    display: flex;
-    align-self: end;
-    align-items: center;
-}
-.card__button {
-    margin-left: auto;
-    fpadding: 5px 20px;
-    
-}
-.artist__title {
-    margin: 0;
 }

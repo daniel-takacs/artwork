@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { setItems } from "../redux/actions/itemActions";
 import ArtworkComponent from "./ArtworkComponent";
 import ReactPaginate from "react-paginate";
+import './ArtworkList.css'
+import { Grid } from '@mui/material';
 
 function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInput }) {
   const items = useSelector((state) => state.allItems.items);
   const { total_pages } = items;
   const dispatch = useDispatch();
   const [limit, setLimit] = useState(25);
-
   const [pageCount, setPageCount] = useState(0);
 
   const fetchItems = async () => {
@@ -24,12 +25,9 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
     dispatch(setItems(response.data.data));
   };
 
-  
-
   useEffect(() => {
-      fetchItems();
+    fetchItems();
   }, [limit]);
-
 
   const getItems = async (currentPage) => {
     const res = await fetch(
@@ -46,9 +44,7 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
     window.scrollTo(0, 0);
   };
 
-
-  if (query.length > 0){
-
+  if (query.length > 0) {
     const fetchItemsBySearch = async () => {
       const response = await axios
         .get(`https://api.artic.edu/api/v1/artworks/search?q=${query}`)
@@ -59,15 +55,26 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
     };
   }
 
-    return (
-      <>
-      <main>
-     <section className="cards">
-          <ArtworkComponent favourites={favourites} setFavourites={setFavourites}
-          query={query} setQuery={setQuery}/>
-        </section>
-        </main>
-  
+  const sortingChange = (e) => {
+    setLimit(e.target.value)
+  }
+
+  return (
+    <div className="artwork_list">
+      <Grid container spacing={5} justifyContent="center">
+        <ArtworkComponent favourites={favourites} setFavourites={setFavourites}
+          query={query} setQuery={setQuery} />
+      </Grid>
+      <div className="paginate-container">
+        <div className="page-item-selector page-link">
+          <label for="item-select">Items per page: </label>
+          <select id="sort" defaultValue="25" onChange={e => sortingChange(e)}>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+          </select>
+        </div>
         <ReactPaginate
           pageCount={pageCount}
           onPageChange={handlePageClick}
@@ -81,8 +88,9 @@ function ArtworkList({ favourites, setFavourites, query, setQuery, input, setInp
           breakClassName={"page-item"}
           breakLinkClassName={"page-link"}
         />
-        </>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default ArtworkList;

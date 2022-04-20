@@ -1,0 +1,22 @@
+.pagination {
+    
+}
+    /* 
+.css-jtlhu6-MuiTablePagination-root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+} */
+.paginate-container {
+   display: flex;
+   justify-content: center;
+   align-items: baseline;
+}
+.page-item-selector {
+    
+}
