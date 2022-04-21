@@ -1,3 +1,14 @@
+.artwork_list {
+    padding: 0 15px;
+}
+.react-loading {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    margin-top: 350px;
+    align-self: center;
+    align-items: center;
+}
 .pagination {
     
 }
@@ -16,6 +27,7 @@
    display: flex;
    justify-content: center;
    align-items: baseline;
+   margin: 50px 0 20px;
 }
 .page-item-selector {
     

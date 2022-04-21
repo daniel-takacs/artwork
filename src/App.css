@@ -12,34 +12,3 @@
 a {
     text-decoration: none;
 }
-
-.pics {
-	opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
-}
-
-.pics:hover {
-	opacity: .7;
-}
-
-
-.detail-pics {
-    max-width: 50%;
-}
-
-.pic > img {
-    background-color: #e0e0e0;
-    max-height: 750px;
-}
-
-.card {
-    border: none;
-    background-color: #e0e0e0;
-}
-.details-content {
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction: column;
-}

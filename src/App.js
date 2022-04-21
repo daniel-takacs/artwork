@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Header from './containers/Header'
-import ArtworkList from './containers/ArtworkList'
-import ArtworkDetails from './containers/ArtworkDetails'
+import ArtworkList from './containers/ArtworkList/ArtworkList'
+import ArtworkDetails from './containers/ArtworkDetails/ArtworkDetails'
 import Favourites from './containers/Favourites'
 import React, { useState } from 'react'
 

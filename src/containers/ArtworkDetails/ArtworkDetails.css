@@ -1,0 +1,14 @@
+.pic > img {
+    background-color: #e0e0e0;
+    max-height: 750px;
+}
+.card {
+    border: none;
+    background-color: #e0e0e0;
+}
+.details-content {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+}

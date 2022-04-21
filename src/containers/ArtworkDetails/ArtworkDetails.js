@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { selectedItem, removeSelectedItem } from "../redux/actions/itemActions";
+import { selectedItem, removeSelectedItem } from "../../redux/actions/itemActions";
+import './ArtworkDetails.css'
+import ReactLoading from "react-loading";
 
-function ArtworkDetails() {
+function ArtworkDetails({ balls }) {
+
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const item = useSelector((state) => state.item);
   const { artist_display, title, provenance_text, id, image_id, date_display, thumbnail } = item;
   const { itemId } = useParams();
@@ -17,8 +23,8 @@ function ArtworkDetails() {
       .catch((err) => {
         console.log(err);
       });
-
-    dispatch(selectedItem(response.data.data));
+      setIsLoaded(true)
+      dispatch(selectedItem(response.data.data));
   };
   useEffect(() => {
     if (itemId && itemId !== "") fetchItemDetail(itemId);
@@ -26,6 +32,17 @@ function ArtworkDetails() {
       dispatch(removeSelectedItem());
     };
   }, [itemId]);
+
+
+
+  if (error) {
+    return <>{error.message}</>
+  } else if(!isLoaded) {
+    return <div className="react-loading">
+        <ReactLoading type={balls} color="#808080"delay="55" />
+          </div>
+  } else {
+
   return (
     <div>
       {Object.keys(item).length === 0 ? (
@@ -45,7 +62,6 @@ function ArtworkDetails() {
           </div>
           <div className="details-content">
               <h5 class="card-title">{title}</h5>
-              
               <p class="card-text">{date_display}</p>
               <p class="card-text">{artist_display}</p>
               <p class="card-text">{thumbnail.alt_text}</p>
@@ -54,6 +70,7 @@ function ArtworkDetails() {
       )}
     </div>
   );
+  }
 }
 
 export default ArtworkDetails;
