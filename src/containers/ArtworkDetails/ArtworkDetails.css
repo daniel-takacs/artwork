@@ -1,14 +1,29 @@
 .pic > img {
-    background-color: #e0e0e0;
+ 
     max-height: 750px;
 }
 .card {
     border: none;
-    background-color: #e0e0e0;
+ 
 }
 .details-content {
     display: flex;
-    justify-content:center;
-    align-items:center;
+    margin: 0 auto;
+    max-width: 900px;
     flex-direction: column;
+    line-height: 30px;
+    letter-spacing: .01em;;
+    margin-top: 50px;
+}
+.details-content > h2 {
+    font-size: 2rem;
+}
+.details-content > h4 {
+    font-size: 1rem;
+    font-weight: 600 !important;
+}
+td, th {
+    border-bottom: 1px solid #999;
+    padding: 1.5rem 0 1.5rem;
+    text-align: left;
 }

@@ -6,8 +6,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Grid } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import '../Global.css'
 
-function Favourites({ favourites }) {
+function Favourites({ favourites, setFavourites }) {
   const [fetchFavourites, setFetchFavourites] = useState([]);
 
   useEffect(() => {
@@ -23,13 +27,20 @@ function Favourites({ favourites }) {
     fetchData();
   }, [setFetchFavourites]);
 
+  const removeClick = (id) => {
+    console.log(id)
+    const newList = fetchFavourites.filter(item => item.id !== id)
+    setFavourites(newList)
+  }
+  console.log('fet',fetchFavourites)
+
   return (
     <>
       {favourites.length > 0 ? (
         <Grid container spacing={5} justifyContent="center">
           {fetchFavourites.map((item) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4}>
-              <Card sx={{ maxWidth: 345 }}>
+            <Grid key={item.id} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
+              <Card  sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -46,10 +57,10 @@ function Favourites({ favourites }) {
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
+                <CardActions className="parentFlexRight">
+                  <IconButton onClick={(e)=>removeClick(item.id)}>
+                  <FavoriteIcon ></FavoriteIcon>
+                  </IconButton>
                 </CardActions>
               </Card>
             </Grid>

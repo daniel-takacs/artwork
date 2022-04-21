@@ -10,9 +10,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
+import '../../Global.css'
 
 function ArtworkComponent({ favourites, setFavourites, query, setQuery, input, setInput }) {
   const [active, setActive] = useState(false);
+  //const [activeFav, setActiveFav] = useState([])
   const items = useSelector((state) => state.allItems.items);
 
   /* const search = (items) => {
@@ -28,7 +30,7 @@ function ArtworkComponent({ favourites, setFavourites, query, setQuery, input, s
     e.preventDefault();
     if (!favourites.includes(id)) setFavourites(favourites.concat(id));
     console.log(id);
-    setActive(!active);
+    setActive(!active)
   };
 
 const renderList = items.filter(item => {
@@ -61,11 +63,16 @@ const renderList = items.filter(item => {
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
+          <CardActions className="parentFlexRight">
             <div className="fav-icon">
-              <IconButton aria-label="delete">
-                <FavoriteIcon onClick={(e) => addToFavourite(e, id)} />
-              </IconButton>
+              <IconButton onClick={(e) => addToFavourite(e, id)} variant="outlined">
+                {active === id ? (
+                  <FavoriteIcon />
+                ) : (
+                  <FavoriteBorderIcon />
+                )
+              }
+                </IconButton>
             </div>
           </CardActions>
             </Link>

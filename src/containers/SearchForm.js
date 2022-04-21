@@ -15,7 +15,7 @@ function SearchForm({ query, setQuery, input, setInput }) {
 
   return (
     <div>
-      <form class="d-flex" onSubmit={submitHandler}>
+      <form class="d-flex" onSubmit={submitHandler}id="navBarSearchForm">
         <input
           value={input}
           class="form-control me-2"
@@ -25,9 +25,9 @@ function SearchForm({ query, setQuery, input, setInput }) {
           aria-label="Search"
           onChange={handleChange}
         />
-        <button class="btn btn-outline-success" type="submit">
+       {/*  <button class="btn btn-outline-success" type="submit">
           Search
-        </button>
+        </button> */}
       </form>
     </div>
   )
