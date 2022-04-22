@@ -1,5 +1,5 @@
-.pic > img {
- 
+img {
+    transition: .1s ease-in-out;
     max-height: 750px;
 }
 .card {
@@ -18,8 +18,9 @@
 .details-content > h2 {
     font-size: 2rem;
 }
-.details-content > h4 {
-    font-size: 1rem;
+
+h4 {
+    font-size: 1.1rem !important;
     font-weight: 600 !important;
 }
 td, th {

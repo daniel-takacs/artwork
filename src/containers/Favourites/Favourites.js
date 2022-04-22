@@ -9,7 +9,8 @@ import { Button, CardActionArea, CardActions, Grid } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import '../Global.css'
+import '../../Global.css'
+import './Favourites.css'
 
 function Favourites({ favourites, setFavourites }) {
   const [fetchFavourites, setFetchFavourites] = useState([]);
@@ -67,7 +68,7 @@ function Favourites({ favourites, setFavourites }) {
           ))}
         </Grid>
       ) : (
-        <div>No favourites added</div>
+        <div className="empty-page">No favourites added</div>
       )}
     </>
   );

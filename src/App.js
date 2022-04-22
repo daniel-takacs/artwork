@@ -1,18 +1,17 @@
 import './Global.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './containers/Header'
+import Header from './containers/Header/Header'
 import ArtworkList from './containers/ArtworkList/ArtworkList'
 import ArtworkDetails from './containers/ArtworkDetails/ArtworkDetails'
-import Favourites from './containers/Favourites'
+import Favourites from './containers/Favourites/Favourites'
 import React, { useState } from 'react'
 
 function App() {
 
   const [favourites, setFavourites] = useState([])
-
   const [input, setInput] = useState("")
   const [query, setQuery] = useState([])
-
+  
   return (
     <div className="App">
       <Router>

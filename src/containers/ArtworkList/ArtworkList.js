@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setItems } from "../../redux/actions/itemActions";
 import ArtworkComponent from "../ArtworkComponent/ArtworkComponent";
 import ReactPaginate from "react-paginate";
@@ -8,19 +8,9 @@ import "./ArtworkList.css";
 import { Grid } from "@mui/material";
 import ReactLoading from "react-loading";
 
-function ArtworkList({
-  favourites,
-  setFavourites,
-  query,
-  setQuery,
-  input,
-  setInput,
-  balls,
-}) {
+function ArtworkList({ favourites, setFavourites, input, balls }) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const items = useSelector((state) => state.allItems.items);
-  const { total_pages } = items;
   const dispatch = useDispatch();
   const [limit, setLimit] = useState(25);
   const [pageCount, setPageCount] = useState(0);
@@ -31,12 +21,11 @@ function ArtworkList({
       .catch((err) => {
         setError(err);
       });
-    const total = total_pages;
-    setPageCount(1200 / limit);
+    const total = response.data.pagination.total;
+    setPageCount(Math.ceil(total / limit));
     setIsLoaded(true);
     dispatch(setItems(response.data.data));
   };
-
   useEffect(() => {
     fetchItems();
   }, [limit]);
@@ -55,17 +44,6 @@ function ArtworkList({
     dispatch(setItems(artworksFormServer));
     window.scrollTo(0, 0);
   };
-
-  if (query.length > 0) {
-    const fetchItemsBySearch = async () => {
-      const response = await axios
-        .get(`https://api.artic.edu/api/v1/artworks/search?q=${query}`)
-        .catch((err) => {
-          console.log(err);
-        });
-      dispatch(setItems(response.data.data));
-    };
-  }
 
   const sortingChange = (e) => {
     setLimit(e.target.value);
@@ -86,10 +64,7 @@ function ArtworkList({
           <ArtworkComponent
             favourites={favourites}
             setFavourites={setFavourites}
-            query={query}
-            setQuery={setQuery}
             input={input}
-            setInput={setInput}
           />
         </Grid>
         <div className="paginate-container">

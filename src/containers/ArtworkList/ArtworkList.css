@@ -9,26 +9,15 @@
     align-self: center;
     align-items: center;
 }
-.pagination {
-    
-}
-    /* 
-.css-jtlhu6-MuiTablePagination-root{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.css-11bfvty-MuiToolbar-root-MuiTablePagination-toolbar{
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-} */
 .paginate-container {
    display: flex;
    justify-content: center;
    align-items: baseline;
    margin: 50px 0 20px;
 }
+.page-link:hover {
+    color: black !important;
+}
 .page-item-selector {
-    
+    margin-right: 10px;
 }

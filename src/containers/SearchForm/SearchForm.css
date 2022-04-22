@@ -1,0 +1,7 @@
+@media screen and (min-width: 1000px) {
+    #navBarSearchForm input[type=text]{
+        width:500px !important;
+    }
+  }
+
+ 

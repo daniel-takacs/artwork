@@ -1,21 +1,20 @@
-import React from 'react'
+import React from "react";
+import "./SearchForm.css";
 
 function SearchForm({ query, setQuery, input, setInput }) {
-
   const submitHandler = (e) => {
-    e.preventDefault()
-    setQuery(input)
-    setInput("")
-  }
-  console.log(query)
+    e.preventDefault();
+    setQuery(input);
+  };
+  console.log(query);
 
   const handleChange = (e) => {
-    setInput(e.target.value)
-  }
+    setInput(e.target.value);
+  };
 
   return (
     <div>
-      <form class="d-flex" onSubmit={submitHandler}id="navBarSearchForm">
+      <form class="d-flex" onSubmit={submitHandler} id="navBarSearchForm">
         <input
           value={input}
           class="form-control me-2"
@@ -25,12 +24,9 @@ function SearchForm({ query, setQuery, input, setInput }) {
           aria-label="Search"
           onChange={handleChange}
         />
-       {/*  <button class="btn btn-outline-success" type="submit">
-          Search
-        </button> */}
       </form>
     </div>
-  )
+  );
 }
 
-export default SearchForm
+export default SearchForm;

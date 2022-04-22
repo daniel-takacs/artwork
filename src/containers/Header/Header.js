@@ -1,16 +1,18 @@
 import React from "react";
-import { Link } from 'react-router-dom'
-import SearchForm from './SearchForm'
+import { Link } from "react-router-dom";
+import SearchForm from "../SearchForm/SearchForm";
+import "./Header.css";
 
 const Header = ({ query, setQuery, input, setInput }) => {
-  
   return (
     <div className="header">
       <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Artworks
-          </a>
+          <Link to="/">
+            <a class="navbar-brand" href="#">
+              Artworks
+            </a>
+          </Link>
           <button
             class="navbar-toggler"
             type="button"
@@ -25,21 +27,26 @@ const Header = ({ query, setQuery, input, setInput }) => {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                  <Link to="/">
-                <a class="nav-link" aria-current="page" href="#">
-                  Home
-                </a>
+                <Link to="/">
+                  <a class="nav-link" aria-current="page" href="#">
+                    Home
+                  </a>
                 </Link>
               </li>
               <li class="nav-item">
-            <Link to="/favourites">
-                <a class="nav-link" href="#">
-                  Favourites
-                </a>
+                <Link to="/favourites">
+                  <a class="nav-link" href="#">
+                    Favourites
+                  </a>
                 </Link>
               </li>
             </ul>
-           <SearchForm query={query} setQuery={setQuery}input={input}setInput={setInput}/>
+            <SearchForm
+              query={query}
+              setQuery={setQuery}
+              input={input}
+              setInput={setInput}
+            />
           </div>
         </div>
       </nav>
