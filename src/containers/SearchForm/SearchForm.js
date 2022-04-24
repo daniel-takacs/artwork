@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setItems } from "../../redux/actions/itemActions";
 
-function SearchForm({ query, setQuery, input, setInput }) {
+function SearchForm() {
+  const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    setQuery(input);
+    setInput("");
+    
+    const fetchQueryData = async () => {
+      const response = await axios
+        .get(`https://api.artic.edu/api/v1/artworks/search?q=${input}`)
+        .catch((err) => {
+          console.log(err);
+        });
+      const receivedData = response.data.data;
+      const searchId = receivedData.map((item) => {
+        return item.id;
+      });
+
+      const fetchData = async () => {
+        const responses = await Promise.all(
+          searchId.map((id) =>
+            axios.get(`https://api.artic.edu/api/v1/artworks/${id}`)
+          )
+        );
+        dispatch(setItems(responses.map((res) => res.data.data)));
+      };
+      fetchData();
+    };
+    fetchQueryData();
   };
-  console.log(query);
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -24,6 +52,9 @@ function SearchForm({ query, setQuery, input, setInput }) {
           aria-label="Search"
           onChange={handleChange}
         />
+        <button class="btn btn-outline-success" type="submit">
+          Search
+        </button>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../../redux/actions/itemActions";
 import ArtworkComponent from "../ArtworkComponent/ArtworkComponent";
 import ReactPaginate from "react-paginate";
@@ -8,10 +8,10 @@ import "./ArtworkList.css";
 import { Grid } from "@mui/material";
 import ReactLoading from "react-loading";
 
-function ArtworkList({ favourites, setFavourites, input, balls }) {
+function ArtworkList({ balls }) {
+  const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const dispatch = useDispatch();
   const [limit, setLimit] = useState(25);
   const [pageCount, setPageCount] = useState(0);
 
@@ -61,11 +61,7 @@ function ArtworkList({ favourites, setFavourites, input, balls }) {
     return (
       <div className="artwork_list">
         <Grid container spacing={5} justifyContent="center">
-          <ArtworkComponent
-            favourites={favourites}
-            setFavourites={setFavourites}
-            input={input}
-          />
+          <ArtworkComponent />
         </Grid>
         <div className="paginate-container">
           <div className="page-item-selector page-link">

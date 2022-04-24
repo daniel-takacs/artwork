@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Header.css";
 
-const Header = ({ query, setQuery, input, setInput }) => {
+const Header = () => {
   return (
     <div className="header">
       <nav class="navbar navbar-expand-lg navbar-light ">
@@ -41,12 +41,7 @@ const Header = ({ query, setQuery, input, setInput }) => {
                 </Link>
               </li>
             </ul>
-            <SearchForm
-              query={query}
-              setQuery={setQuery}
-              input={input}
-              setInput={setInput}
-            />
+            <SearchForm />
           </div>
         </div>
       </nav>

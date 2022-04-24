@@ -1,4 +1,4 @@
-import { ActionTypes } from '../contants/action-types'
+import { ActionTypes } from '../constants/action-types'
 
 
 const initialState = {
@@ -23,12 +23,3 @@ export const selectedItemReducer = (state={}, {type, payload}) => {
             return state
     }
 }
-
-export const favouriteReducer = (state = {}, { type, payload }) => {
-    switch (type) {
-        case ActionTypes.SET_FAVOURITES:
-            return {...state, ...payload}
-        default:
-            return state
-    } 
- }

@@ -5,20 +5,22 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions, Grid } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IconButton from '@mui/material/IconButton';
+import { CardActionArea, CardActions, Grid } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import '../../Global.css'
-import './Favourites.css'
+import "../../Global.css";
+import "./Favourites.css";
+import { setFavoritesId } from "../../redux/actions/favoriteIdActions";
 
-function Favourites({ favourites, setFavourites }) {
+function Favourites() {
+  const dispatch = useDispatch();
+  const favoritesId = useSelector((state) => state.allFavoritesId.favoritesId);
   const [fetchFavourites, setFetchFavourites] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const responses = await Promise.all(
-        favourites.map((id) =>
+        favoritesId.map((id) =>
           axios.get(`https://api.artic.edu/api/v1/artworks/${id}`)
         )
       );
@@ -29,19 +31,18 @@ function Favourites({ favourites, setFavourites }) {
   }, [setFetchFavourites]);
 
   const removeClick = (id) => {
-    console.log(id)
-    const newList = fetchFavourites.filter(item => item.id !== id)
-    setFavourites(newList)
-  }
-  console.log('fet',fetchFavourites)
+    console.log(id);
+    const newList = fetchFavourites.filter((item) => item.id !== id);
+    dispatch(setFavoritesId(newList));
+  };
 
   return (
     <>
-      {favourites.length > 0 ? (
+      {favoritesId.length > 0 ? (
         <Grid container spacing={5} justifyContent="center">
           {fetchFavourites.map((item) => (
             <Grid key={item.id} item xs={12} sm={6} md={4} lg={3} xl={2.4}>
-              <Card  sx={{ maxWidth: 345 }}>
+              <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -59,8 +60,8 @@ function Favourites({ favourites, setFavourites }) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions className="parentFlexRight">
-                  <IconButton onClick={(e)=>removeClick(item.id)}>
-                  <FavoriteIcon ></FavoriteIcon>
+                  <IconButton onClick={() => removeClick(item.id)}>
+                    <FavoriteIcon></FavoriteIcon>
                   </IconButton>
                 </CardActions>
               </Card>

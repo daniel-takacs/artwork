@@ -1,10 +1,11 @@
 import {combineReducers} from 'redux'
-import {itemReducer, selectedItemReducer, favouriteReducer} from './itemReducer'
+import {itemReducer, selectedItemReducer} from './itemReducer'
+import {favoritesIdReducer} from './favoriteIdReducer'
 
 const reducers = combineReducers({
     allItems: itemReducer,
     item: selectedItemReducer,
-    allFavourites: favouriteReducer
+    allFavoritesId: favoritesIdReducer
 })
 
 export default reducers

@@ -1,4 +1,4 @@
-import {ActionTypes} from '../contants/action-types'
+import {ActionTypes} from '../constants/action-types'
 
 export const setItems = (items) => {
     return {
@@ -20,9 +20,3 @@ export const removeSelectedItem = (item) => {
     }
 }
 
-export const setFavourites = (favourites) => {
-    return {
-        type: ActionTypes.SET_FAVOURITES,
-        payload: favourites,
-    }
-}

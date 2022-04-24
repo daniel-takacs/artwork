@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./ArtworkComponent.css";
@@ -11,26 +11,22 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, CardActions, Grid } from "@mui/material";
 import "../../Global.css";
+import { setFavoritesId } from "../../redux/actions/favoriteIdActions";
 
-function ArtworkComponent({ favourites, setFavourites, input }) {
+function ArtworkComponent() {
+  const dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const items = useSelector((state) => state.allItems.items);
+  const favoritesId = useSelector((state) => state.allFavoritesId.favoritesId)
 
   const addToFavourite = (e, id) => {
     e.preventDefault();
-    if (!favourites.includes(id)) setFavourites(favourites.concat(id));
+    if (!favoritesId.includes(id)) dispatch(setFavoritesId(favoritesId.concat(id)));
     console.log(id);
     setActive(!active);
-  };
-
+  }
+  console.log('this is items:', items)
   const renderList = items
-    .filter((item) => {
-      if (input.length === 0) {
-        return item;
-      } else if (item.title.toLowerCase().includes(input.toLowerCase())) {
-        return item;
-      }
-    })
     .map((item) => {
       const { id, title, image_id, artist_title } = item;
 
