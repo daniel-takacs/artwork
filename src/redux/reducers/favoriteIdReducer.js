@@ -13,7 +13,7 @@ export const favoritesIdReducer = (state = initialState, action) => {
         case ActionTypes.DELETE_FAVORITES_ID:
             return {
                 ...state,
-                favoritesId: state.favoritesId.filter((item, id) => id !== action.payload)
+                favoritesId: state.favoritesId.filter((id) => id !== action.payload)
             }
        default:
            return state

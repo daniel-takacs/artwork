@@ -32,9 +32,9 @@ function ArtworkComponent() {
 
       return (
         <Grid item xs={10} sm={6} md={4} lg={3} xl={2.4}>
-          <Card key={id} sx={{ maxWidth: 345 }}>
+          <Card key={id} sx={{ maxWidth: 345 }} className="list_card">
             <Link to={`/item/${id}`} style={{ textDecoration: "none", color: "black" }}>
-              <CardActionArea>
+              <CardActionArea >
                 <CardMedia
                   className="card-image"
                   component="img"

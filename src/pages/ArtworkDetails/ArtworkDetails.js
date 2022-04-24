@@ -9,11 +9,9 @@ import {
 import "./ArtworkDetails.css";
 import ReactLoading from "react-loading";
 
-function ArtworkDetails({ balls }) {
+function ArtworkDetails({ balls, isLoaded, setIsLoaded, error, setError }) {
   const item = useSelector((state) => state.item);
   const [dataDetails, setDataDetails] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const { image_id, date_display } = item;
   const { itemId } = useParams();
   const { label } = dataDetails;
@@ -23,7 +21,7 @@ function ArtworkDetails({ balls }) {
     const response = await axios
       .get(`https://api.artic.edu/api/v1/artworks/${id}`)
       .catch((err) => {
-        console.log(err);
+        setError(err)
       });
     setIsLoaded(true);
     dispatch(selectedItem(response.data.data));
@@ -61,7 +59,9 @@ function ArtworkDetails({ balls }) {
     return (
       <div>
         {Object.keys(dataDetails).length === 0 ? (
-          <div>...Loading</div>
+           <div className="react-loading">
+           <ReactLoading type={balls} color="#808080" delay="55" />
+         </div>
         ) : (
           <>
             <div class="card mb-3 justify-content-center align-items-center">

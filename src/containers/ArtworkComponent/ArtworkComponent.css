@@ -3,11 +3,15 @@
 }
 .card-image{
   max-height: 80%;
-  transition: .3s ease-in-out;
-}
-.card-image:hover {
-  opacity: .7
+  
 }
 .list-title {
   font-size:1rem !important;
+}
+.list_card {
+  transition: .3s ease-in-out !important;
+}
+.list_card:hover {
+  opacity: .7;
+  transition: .3s ease-in-out !important;
 }

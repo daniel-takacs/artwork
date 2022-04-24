@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setItems } from "../../redux/actions/itemActions";
 
-function SearchForm() {
+function SearchForm({ setIsLoaded }) {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
@@ -24,12 +24,15 @@ function SearchForm() {
       });
 
       const fetchData = async () => {
+        setIsLoaded(false);
         const responses = await Promise.all(
           searchId.map((id) =>
             axios.get(`https://api.artic.edu/api/v1/artworks/${id}`)
           )
         );
         dispatch(setItems(responses.map((res) => res.data.data)));
+        setIsLoaded(true);
+
       };
       fetchData();
     };

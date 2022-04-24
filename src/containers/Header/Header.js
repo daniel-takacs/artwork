@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SearchForm from "../SearchForm/SearchForm";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ setIsLoaded }) => {
   return (
     <div className="header">
       <nav class="navbar navbar-expand-lg navbar-light ">
@@ -41,7 +41,7 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
-            <SearchForm />
+            <SearchForm setIsLoaded={setIsLoaded}/>
           </div>
         </div>
       </nav>

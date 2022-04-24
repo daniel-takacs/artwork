@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../../redux/actions/itemActions";
-import ArtworkComponent from "../ArtworkComponent/ArtworkComponent";
+import ArtworkComponent from "../../containers/ArtworkComponent/ArtworkComponent";
 import ReactPaginate from "react-paginate";
 import "./ArtworkList.css";
 import { Grid } from "@mui/material";
 import ReactLoading from "react-loading";
 
-function ArtworkList({ balls }) {
+function ArtworkList({ balls, error, isLoaded, setError, setIsLoaded }) {
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  
   const [limit, setLimit] = useState(25);
   const [pageCount, setPageCount] = useState(0);
 
@@ -58,12 +57,13 @@ function ArtworkList({ balls }) {
       </div>
     );
   } else {
+    
     return (
       <div className="artwork_list">
         <Grid container spacing={5} justifyContent="center">
           <ArtworkComponent />
         </Grid>
-        <div className="paginate-container">
+        <div className="paginate-container flex-wrap">
           <div className="page-item-selector page-link">
             <label for="item-select">Items per page: </label>
             <select

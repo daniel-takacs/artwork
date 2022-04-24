@@ -11,30 +11,32 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import "../../Global.css";
 import "./Favourites.css";
 import { setFavoritesId } from "../../redux/actions/favoriteIdActions";
+import { deleteFavoritesId } from "../../redux/actions/favoriteIdActions";
+
 
 function Favourites() {
   const dispatch = useDispatch();
   const favoritesId = useSelector((state) => state.allFavoritesId.favoritesId);
   const [fetchFavourites, setFetchFavourites] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const responses = await Promise.all(
-        favoritesId.map((id) =>
-          axios.get(`https://api.artic.edu/api/v1/artworks/${id}`)
-        )
-      );
-      setFetchFavourites(responses.map((res) => res.data.data));
-    };
+  const fetchData = async () => {
+    const responses = await Promise.all(
+      favoritesId.map((id) =>
+        axios.get(`https://api.artic.edu/api/v1/artworks/${id}`)
+      )
+    );
+    setFetchFavourites(responses.map((res) => res.data.data));
+  };
 
+  useEffect(() => {
     fetchData();
-  }, [setFetchFavourites]);
+  }, []);
 
   const removeClick = (id) => {
     console.log(id);
-    const newList = fetchFavourites.filter((item) => item.id !== id);
-    dispatch(setFavoritesId(newList));
+    dispatch(deleteFavoritesId(id))
   };
+
 
   return (
     <>
